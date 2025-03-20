@@ -390,7 +390,7 @@
         }
 
         // Tạo trái tim mỗi 300ms
-        setInterval(createHeart, 300);
+        setInterval(createHeart, 500);
 
         // Xử lý nút "Không" di chuyển
         function moveButton(button) {
@@ -427,7 +427,7 @@
             });
             // Tăng số lượng trái tim
             clearInterval(heartInterval);
-            heartInterval = setInterval(createHeart, 50);
+            heartInterval = setInterval(createHeart, 100);
 
             // Dừng pháo hoa thường và bắt đầu pháo hoa đặc biệt
             stopRegularFireworks = true;

@@ -503,7 +503,6 @@
 
                     // Tạo hiệu ứng nổ với hạt tỏa ra
                     createParticleExplosion(explosionX, explosionY, color);
-                    createHeartExplosion(explosionX, explosionY);
 
                     // Xóa pháo hoa
                     firework.remove();
@@ -531,73 +530,38 @@
                 }
             }, 1500);
         }
-        function createHeartExplosion(x, y) {
-            const scale = 6; // Điều chỉnh kích thước trái tim
-            const particles = []; // Mảng chứa các hạt
+        const scale = 6; // Điều chỉnh kích thước trái tim
+        const particles = []; // Mảng chứa các hạt
 
-            for (let angle = 0; angle < Math.PI * 2; angle += 0.03) { // Giảm bước nhảy để tạo nhiều điểm hơn
-                let heartX = 16 * Math.pow(Math.sin(angle), 3);
-                let heartY = 13 * Math.cos(angle) - 5 * Math.cos(2 * angle) - 2 * Math.cos(3 * angle) - Math.cos(4 * angle);
+        for (let angle = 0; angle < Math.PI * 2; angle += 0.03) { // Giảm bước nhảy để tạo nhiều điểm hơn
+            let heartX = 16 * Math.pow(Math.sin(angle), 3);
+            let heartY = 13 * Math.cos(angle) - 5 * Math.cos(2 * angle) - 2 * Math.cos(3 * angle) - Math.cos(4 * angle);
 
-                // Tạo nhiều hạt tại mỗi điểm
-                for (let i = 0; i < 2; i++) { // Tăng số lượng hạt mỗi điểm
-                    const particle = document.createElement('div');
-                    particle.className = 'particle';
-
-                    // Thêm một chút ngẫu nhiên để tạo hiệu ứng tỏa ra
-                    let randomOffsetX = (Math.random() - 0.5) * 10;
-                    let randomOffsetY = (Math.random() - 0.5) * 10;
-
-                    particle.style.left = `${x}px`;
-                    particle.style.top = `${y}px`;
-
-                    // Hiệu ứng di chuyển
-                    particle.style.setProperty('--tx', `${heartX * scale + randomOffsetX}px`);
-                    particle.style.setProperty('--ty', `${-heartY * scale + randomOffsetY}px`);
-
-                    // Chọn màu ngẫu nhiên
-                    particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-
-                    document.body.appendChild(particle);
-                    particles.push(particle);
-
-                    // Xóa hạt sau 2 giây
-                    setTimeout(() => {
-                        particle.remove();
-                    }, 2000);
-                }
-            }
-        }
-
-
-
-        // Cải thiện hiệu ứng nổ của pháo hoa
-        function createParticleExplosion(x, y, color) {
-            const particleCount = 10; // Tăng số lượng hạt để hiệu ứng đẹp hơn
-
-            for (let i = 0; i < particleCount; i++) {
+            // Tạo nhiều hạt tại mỗi điểm
+            for (let i = 0; i < 2; i++) { // Tăng số lượng hạt mỗi điểm
                 const particle = document.createElement('div');
                 particle.className = 'particle';
-                particle.style.left = x + 'px';
-                particle.style.top = y + 'px';
 
-                // Tạo hiệu ứng tỏa tròn 360 độ
-                const angle = (i / particleCount) * Math.PI * 2;
-                const distance = 50 + Math.random() * 80;
+                // Thêm một chút ngẫu nhiên để tạo hiệu ứng tỏa ra
+                let randomOffsetX = (Math.random() - 0.5) * 10;
+                let randomOffsetY = (Math.random() - 0.5) * 10;
 
-                const tx = Math.cos(angle) * distance;
-                const ty = Math.sin(angle) * distance;
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
 
-                particle.style.setProperty('--tx', tx + 'px');
-                particle.style.setProperty('--ty', ty + 'px');
-                particle.style.background = color;
+                // Hiệu ứng di chuyển
+                particle.style.setProperty('--tx', `${heartX * scale + randomOffsetX}px`);
+                particle.style.setProperty('--ty', `${-heartY * scale + randomOffsetY}px`);
+
+                // Chọn màu ngẫu nhiên
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
 
                 document.body.appendChild(particle);
+                particles.push(particle);
 
+                // Xóa hạt sau 2 giây
                 setTimeout(() => {
-                    if (document.body.contains(particle)) {
-                        particle.remove();
-                    }
+                    particle.remove();
                 }, 2000);
             }
         }
